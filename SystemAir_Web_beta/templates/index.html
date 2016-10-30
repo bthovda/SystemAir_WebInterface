@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <title>"{{ HouseName }}"</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body onload="draw_Panel();draw_HeatIcon();draw_FanIcon();write_Status()">
+
+    <canvas id="myCanvas" width="552" height="615"></canvas>
+    
+    <div style="display:inline-block; position:absolute; top:300; left:160;">
+        <a href='/Hplus' class="round-button">+</a>
+        <a href='/Hminus' class="round-button">–</a>
+    </div> 
+ 
+    <div style="display:inline-block; position:absolute; top:300; left:320;">
+        <a href='/Splus' class="round-button">+</a>
+        <a href='/Sminus' class="round-button">–</a>
+    </div> 
+
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+
+    function draw_Panel() {
+        var Panel = new Image();
+        Panel.src = '{{ PanelSrc }}';
+        Panel.onload = function () {
+        context.drawImage(Panel, 0, 0);
+    };} 
+    
+    function draw_HeatIcon() {
+        var HeatIcon = new Image();
+        HeatIcon.src = "{{ HeatIconSrc }}";
+        HeatIcon.onload = function () {
+        context.drawImage(HeatIcon, 140, 100);
+    };}
+  
+    function draw_FanIcon() {
+        var FanIcon = new Image();
+        FanIcon.src = "{{ FanIconSrc }}";
+        FanIcon.onload = function () {
+        context.drawImage(FanIcon, 300, 100);
+    };}
+    
+    function write_Status() {
+       context.font = "20px Arial";
+       context.fillStyle = "black";
+       context.fillText('{{ HouseName }}',0,20);
+    }
+     
+     
+    </script>
+    
+</body>
+</html>
