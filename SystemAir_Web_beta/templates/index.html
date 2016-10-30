@@ -1,0 +1,185 @@
+<html lang="en">
+<head>
+    <title>Ventilasjon Fjellmoveien 8a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="10; URL=http://192.168.1.158:8060">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body onload="draw_Panel();draw_Temp();draw_Vifte();write_Status();">
+
+<div>
+  <canvas id="c5" width="550" height = "800" style="border: none;"></canvas>
+    <br />
+    
+    <div style="display:inline-block; position:absolute; top:70; left:127;">
+        <a href='/Hplus' class="round-button">+</a>
+        <a href='/Hminus' class="round-button">–</a>
+    </div> 
+ 
+      <div style="display:inline-block; position:absolute; top:70; left:380;">
+        <a href='/Splus' class="round-button">+</a>
+        <a href='/Sminus' class="round-button">–</a>
+    </div> 
+    
+     <div style="display:inline-block; position:absolute; top:280; left:127;">
+        <a href='' class="round-button">+</a>
+        <a href='' class="round-button">–</a>
+    </div> 
+ 
+    <div style="display:inline-block; position:absolute; top:220; left:250;">
+        <a href='' class="round-button">V</a>
+        <a href='' class="round-button">K</a>
+        <a href='' class="round-button">T</a>
+        <a href='' class="round-button">S</a>
+    </div> 
+    
+     <div style="display:inline-block; position:absolute; top:280; left:380;">
+        <a href='' class="round-button">+</a>
+        <a href='' class="round-button">–</a>
+    </div>     
+
+</div>
+
+<script>
+
+  var c5 = document.getElementById("c5");
+  var c5_context = c5.getContext("2d");
+  
+  var KontrollPanel = new Image();
+  KontrollPanel.src = '/static/Panel.png';
+
+  var VifteMenyIkon = new Image();
+  VifteMenyIkon.src = '/static/VifteMenyIkon.png';
+  
+  var VarmeMenyIkon = new Image();
+  VarmeMenyIkon.src = '/static/VarmeMenyIkon.png';
+  
+ function draw_Panel() {
+  c5.style.backgroundColor = 'rgba(33, 113, 218, 1)';
+  c5_context.beginPath();
+  c5_context.moveTo(0, 25);
+  c5_context.lineTo(550, 25);
+  c5_context.stroke();
+  
+  c5_context.beginPath();
+  c5_context.moveTo(0, 210);
+  c5_context.lineTo(550, 210);
+  c5_context.stroke();
+  
+  c5_context.beginPath();
+  c5_context.moveTo(0, 430);
+  c5_context.lineTo(550, 430);
+  c5_context.stroke();
+  
+  c5_context.beginPath();
+  c5_context.moveTo(0, 580);
+  c5_context.lineTo(550, 580);
+  c5_context.stroke();
+  
+  }
+ function write_Status() {
+    c5_context.font = "14px Arial";
+    c5_context.fillStyle = "grey";
+    
+    c5_context.fillStyle = "white";
+    c5_context.fillText("Fjellmoveien 8a", 130, 20);
+    
+    c5_context.fillText("Stue:", 10, 225);
+    c5_context.fillText("T: "+"{{ ActStueTemp }}"+'\xB0'+"C", 10, 245);
+    c5_context.fillText("S: "+"{{ SetStueTemp }}"+'\xB0'+"C", 10, 265);
+    c5_context.fillText("M: "+"{{ ModeStue }}", 10, 285);
+    c5_context.fillText("LoftStue:", 480, 225);
+    c5_context.fillText("T: "+"{{ ActLoftStueTemp }}"+'\xB0'+"C", 480, 245);
+    c5_context.fillText("S: "+"{{ SetLoftStueTemp }}"+'\xB0'+"C", 480, 265);
+    c5_context.fillText("M: "+"{{ ModeLoftStue }}", 480, 285);
+    
+    c5_context.fillText("Airsupply : "+"{{ SupplyAir }}"+'\xB0'+"C", 200, 490);
+    c5_context.fillText("Extract     : "+"{{ ExtractAir }}"+'\xB0'+"C", 200, 470);
+    
+    c5_context.fillText("UTE:", 10, 450);
+    c5_context.fillText("T: "+"{{ TempOut }}"+'\xB0'+"C", 10, 470);
+    c5_context.fillText("W: "+"{{ VindMS }}"+"m/s", 10, 490);
+    c5_context.fillText("D: "+degToCard(170), 10, 510);
+    c5_context.fillText("H: "+"{{ LuftFukt }}"+"%", 10, 5200);
+    c5_context.fillText("L: "+"{{ Baro }}"+"hPa", 10, 530);
+    c5_context.fillText("U: "+"{{ LastWeatherUpdate}}", 210, 550);
+    
+    c5_context.fillText("INNE:", 10, 600);
+    c5_context.fillText("Bad 2.etg:", 10, 620);
+    c5_context.fillText("T: "+"{{ BadUetgTemp }}"+'\xB0'+"C", 15, 640);
+    c5_context.fillText("F: "+"{{ BadUetgFukt }}"+"%", 15, 660);
+    c5_context.fillText("Vaskerom:", 200, 620);
+    c5_context.fillText("T: "+"{{ VaskeromTemp }}"+'\xB0'+"C", 205, 640);
+    c5_context.fillText("F: "+"{{ VaskeromFukt }}"+"%", 205,660);
+    c5_context.fillText("Bad U.etg:", 480, 620);
+    c5_context.fillText("T: "+"{{ Bad2etgTemp }}"+'\xB0'+"C", 485, 640);
+    c5_context.fillText("F: "+"{{ Bad2etgFukt }}"+"%", 485, 660);
+  }
+
+  function draw_Temp() {
+  var TempIkon = new Image();
+  TempIkon.src = "{{ VarmeIcon }}";
+  TempIkon.onload = function () {
+  c5_context.drawImage(TempIkon, 10, 50);
+  };}
+  
+  function draw_Vifte() {
+  var VifteIkon = new Image();
+  VifteIkon.src = "{{ VifteIcon }}";
+  VifteIkon.onload = function () {
+  c5_context.drawImage(VifteIkon, 430, 50);
+  };}
+  
+  function draw_VifteMenyIkon() {
+  c5_context.drawImage(VifteMenyIkon, 65, 400);
+  }
+  
+  function draw_VarmeMenyIkon(){
+  c5_context.drawImage(VarmeMenyIkon, 80, 295);
+  }
+  
+  function Clear_image() {
+  c5_context.clearRect(1, 1, 600, 300);
+  } 
+  
+  var degToCard = function(deg){
+  if (deg>11.25 && deg<33.75){
+    return "NNE";
+  }else if (deg>33.75 && deg<56.25){
+    return "ENE";
+  }else if (deg>56.25 && deg<78.75){
+    return "E";
+  }else if (deg>78.75 && deg<101.25){
+    return "ESE";
+  }else if (deg>101.25 && deg<123.75){
+    return "ESE";
+  }else if (deg>123.75 && deg<146.25){
+    return "SE";
+  }else if (deg>146.25 && deg<168.75){
+    return "SSE";
+  }else if (deg>168.75 && deg<191.25){
+    return "S";
+  }else if (deg>191.25 && deg<213.75){
+    return "SSW";
+  }else if (deg>213.75 && deg<236.25){
+    return "SW";
+  }else if (deg>236.25 && deg<258.75){
+    return "WSW";
+  }else if (deg>258.75 && deg<281.25){
+    return "W";
+  }else if (deg>281.25 && deg<303.75){
+    return "WNW";
+  }else if (deg>303.75 && deg<326.25){
+    return "NW";
+  }else if (deg>326.25 && deg<348.75){
+    return "NNW";
+  }else{
+    return "N"; 
+  }
+}
+
+
+</script>
+    
+</body>
+</html>
