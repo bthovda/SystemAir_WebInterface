@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for
 from DeviceClasses.SystemAir_Class import SystemAirUnit
 
-Ventilation_Unit = SystemAirUnit('/dev/ttyUSB0', 1, "NAME OF YOUR HOUSE",'UNITNICK')
+Ventilation_Unit = SystemAirUnit('/dev/ttyUSB0', 1, "NAME OF YOUR HOUSE",'UNITNICK')   
 IP_ADDR_RASPBERRY = "192.168.1.158" # Change to your IP address (i.e Raspberry Pi) 
 app = Flask(__name__)
 
