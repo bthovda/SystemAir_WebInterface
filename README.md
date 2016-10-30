@@ -1,7 +1,7 @@
 # SystemAir_WebInterface
 Created by Bjoern Tore Hovda
 
-Web interface for SystemAir residental HVAC units
+Web interface for SystemAir residential HVAC units VTR
 
 The modbus driver is based on this repository: https://github.com/wimpy87/sambus. (Thank you Atle!!)
 
