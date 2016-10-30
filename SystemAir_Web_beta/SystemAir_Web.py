@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for
 from DeviceClasses.SystemAir_Class import SystemAirUnit
 
 Ventilation_Unit = SystemAirUnit('/dev/ttyUSB0', 1, "NAME OF YOUR HOUSE",'UNITNICK')
-IP_ADDR_RASPBERRY = "192.168.1.158"
+IP_ADDR_RASPBERRY = "192.168.1.158" # Change to your IP address (i.e Raspberry Pi) 
 app = Flask(__name__)
 
 @app.route('/')
@@ -65,4 +65,4 @@ def DecreaseTemp():
     return redirect(url_for('PanelPage'))
 
 if __name__ == "__main__": 
-    app.run(debug=False, host="192.168.1.158", port=8040)
+    app.run(debug=False, host=IP_ADDR_RASPBERRY , port=8040)
