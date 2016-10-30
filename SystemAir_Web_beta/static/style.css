@@ -1,0 +1,56 @@
+.round-button {
+    display:block;
+    width:80px;
+    height:80px;
+    line-height:80px;
+    border: 2px solid #f5f5f5;
+    border-radius: 50%;
+    color:#f5f5f5;
+    text-align:center;
+    text-decoration:none;
+    background: #464646;
+    box-shadow: 0 0 3px gray;
+    font-size:20px;
+    font-weight:bold;
+}
+.round-button:hover {
+    background: #262626;
+}
+
+.Large-red-round-button {
+    display:block;
+    width:70px;
+    height:70px;
+    line-height:70px;
+    border: 2px solid #f5f5f5;
+    border-radius: 50%;
+    color:#f5f5f5;
+    text-align:center;
+    text-decoration:none;
+    background: #FA8072;
+    box-shadow: 0 0 3px gray;
+    font-size:20px;
+    font-weight:bold;
+}
+.Large-red-round-button:hover {
+    background: #FF0000;
+}
+
+.Large-blue-round-button {
+    display:block;
+    width:70px;
+    height:70px;
+    line-height:70px;
+    border: 2px solid #f5f5f5;
+    border-radius: 50%;
+    color: #f5f5f5;
+    text-align:center;
+    text-decoration:none;
+    background: #4682B4;
+    box-shadow: 0 0 3px gray;
+    font-size:20px;
+    font-weight:bold;
+}
+.Large-blue-round-button:hover {
+    background: #4169E1;
+}
