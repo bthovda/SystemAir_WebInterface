@@ -10,8 +10,8 @@ MaxNumOfTry = 10
 
 
 class SystemAirUnit( minimalmodbus.Instrument ):
-    
-    
+
+
     def __init__(self, portname, slaveaddress, LocationName, Tag):
         minimalmodbus.Instrument.__init__(self, portname, slaveaddress)
         self.Name = LocationName
@@ -20,13 +20,13 @@ class SystemAirUnit( minimalmodbus.Instrument ):
 
 
     ## Registers for fan control
-  
+
     def get_fan_lvl(self):
         """Return the fan speed level."""
         return self.Tolerant_read_register(100)
-        
-   
- 
+
+
+
     def set_fan_lvl(self, value):
         """Sett the fan speed level. value = 1-3"""
         minimalmodbus._checkInt(value, minvalue=1, maxvalue=3, description='fan value')
@@ -37,18 +37,18 @@ class SystemAirUnit( minimalmodbus.Instrument ):
     def get_temp_lvl(self):
         """Return the temperatur level."""
         return self.Tolerant_read_register(206)
-        
+
     ## Kitchen fan (optional)
     def Check_DI3(self):
         """Return the temperatur level."""
         return self.Tolerant_read_register(700)
-  
-  
+
+
     def set_temp_lvl(self, value):
         """sett the temperatur level. value = 0-5"""
         minimalmodbus._checkInt(value, minvalue=0, maxvalue=5, description='temp value')
         self.Tolerant_write_register(206, value)
-           
+
         return self.Tolerant_read_register(206)
 
 
@@ -105,7 +105,7 @@ class SystemAirUnit( minimalmodbus.Instrument ):
                 NumOfTry = NumOfTry + 1
                 print(str(NumOfTry)+" IOERROR, retry until max attemps")
                 pass
-            
+
     def Tolerant_write_register(self, RegNum, value):
         NumOfTry = 0
         success = False
@@ -117,11 +117,11 @@ class SystemAirUnit( minimalmodbus.Instrument ):
                 NumOfTry = NumOfTry + 1
                 print(str(NumOfTry)+" IOERROR, retry until max attemps")
                 pass
-            
+
 if __name__ == '__main__':
    Ventilation_BOB = SystemAirUnit('/dev/ttyUSB0', 1, "Test address",'Test unit')
 
    print Ventilation_BOB.get_fan_lvl()
- 
+
    pass
 
